@@ -14,4 +14,9 @@ public class BaseConverter {
                 return celsiusDegrees;
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println(convert(34, Temperature.FAHRENHEIT));
+        System.out.println(convert(34, Temperature.KELVIN));
+    }
 }

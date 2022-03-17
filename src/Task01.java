@@ -1,37 +1,63 @@
 import java.util.Arrays;
-import java.util.OptionalDouble;
-import java.util.stream.Stream;
 
 public class Task01 {
+    static double[] initDoubleArr(int length) {
+        if (length <= 0) {
+            return null;
+        }
+
+        double[] arr = new double[length];
+
+        for (int i = 0; i < length; i++) {
+            arr[i] = Math.random();
+        }
+
+        return arr;
+    }
+
+    static double minValue(double[] arr) throws NullPointerException {
+        double min = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+
+        return min;
+    }
+
+    static double maxValue(double[] arr) throws NullPointerException {
+        double max = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+
+        return max;
+    }
+
+    static double averageValue(double[] arr) throws NullPointerException {
+        double avg = 0;
+
+        for (double elem : arr) {
+            avg += elem;
+        }
+
+        return avg / arr.length;
+    }
+
     public static void main(String[] args) {
-        double[] randNumsArr = new double[6];
+        double[] arr = initDoubleArr(6);
 
-        for (int i = 0; i < 6; i++) {
-            randNumsArr[i] = Math.random();
-        }
-
-        OptionalDouble min = Stream.of(randNumsArr)
-                .flatMapToDouble(Arrays::stream)
-                .min();
-
-        OptionalDouble max = Stream.of(randNumsArr)
-                .flatMapToDouble(Arrays::stream)
-                .max();
-
-        OptionalDouble average = Stream.of(randNumsArr)
-                .flatMapToDouble(Arrays::stream)
-                .average();
-
-        if (min.isPresent()) {
-            System.out.printf("Минимальное значение массива: %f\n", min.getAsDouble());
-        }
-
-        if (max.isPresent()) {
-            System.out.printf("Максимальное значение массива: %f\n", max.getAsDouble());
-        }
-
-        if (average.isPresent()) {
-            System.out.printf("Среднее значение массива: %f\n", average.getAsDouble());
+        try {
+            System.out.println(averageValue(arr));
+            System.out.println(maxValue(arr));
+            System.out.println(minValue(arr));
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 }
